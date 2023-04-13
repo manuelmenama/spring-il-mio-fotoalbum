@@ -26,4 +26,8 @@ public class ImageService {
         Image selectedImage = imageRepository.findById(id).orElseThrow(() -> new ImageNotFoundException("Image with id " + id + " not found!"));
         return selectedImage;
     }
+
+    public List<Image> getImageByTitle(String title) {
+        return imageRepository.findByTitleContainingIgnoreCase(title);
+    }
 }

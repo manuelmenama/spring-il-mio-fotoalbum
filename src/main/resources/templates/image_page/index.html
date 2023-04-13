@@ -8,6 +8,11 @@
 </head>
 <body>
 
+    <header>
+        <th:block th:replace="~{/fragments/fragment_header :: navbar(true)}">
+        </th:block>
+    </header>
+
     <div class="container">
         <div class="row gy-4">
             <div class="col-4" th:each="image : ${selectedImages}" th:object="${image}">

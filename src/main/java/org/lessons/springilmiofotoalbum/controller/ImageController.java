@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/images")
@@ -20,9 +22,16 @@ public class ImageController {
     ImageService imageService;
 
     @GetMapping
-    public String index(Model model) {
-        List<Image> selectedImages = imageService.getAllImage();
-        model.addAttribute("selectedImages", selectedImages);
+    public String index(Model model, @RequestParam Optional<String> q) {
+
+        List<Image> selectedImages = null;
+        if (!q.isPresent()) {
+            selectedImages = imageService.getAllImage();
+            model.addAttribute("selectedImages", selectedImages);
+        } else {
+            selectedImages = imageService.getImageByTitle(q.get());
+            model.addAttribute("selectedImages", selectedImages);
+        }
         return "image_page/index";
     }
 
