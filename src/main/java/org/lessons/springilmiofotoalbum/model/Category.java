@@ -2,6 +2,8 @@ package org.lessons.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Category {
     private LocalDateTime updatedAt;
 
     @ManyToMany(mappedBy = "categorySet")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Image> imageList;
 
     //costruttore

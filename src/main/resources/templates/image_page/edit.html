@@ -55,20 +55,33 @@
                         </div>
                     </div>
                 </div>
+                <!--colonna categorie -->
+
+                <div class="col-12 d-flex mt-3 ms-2">
+                    <h6 class="me-3">Category:</h6>
+                    <div
+                            th:each="category : ${allCategories}"
+                            th:object="${category}"
+                            class="form-check me-4">
+                        <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="|cat_${category.id}|" th:field="${image.categorySet}">
+                        <label class="form-check-label" th:for="|cat_${category.id}|" th:text="${category.name}">
+                        </label>
+                    </div>
+
+                </div>
 
             </div>
-            <!--colonna ingredienti -->
-            <!--<div class="col-4">
-                <h6>Ingredienti:</h6>
+            <div class="col-4">
+                <h6>Visibilità:</h6>
                 <div
-                        th:each="ingredient : ${allIngredients}"
                         class="form-check">
-                    <input class="form-check-input" type="checkbox" th:value="${ingredient.id}" th:id="|ingr_${ingredient.id}|" th:field="*{ingredients}">
-                    <label class="form-check-label" th:for="|ingr_${ingredient.id}|" th:text="${ingredient.name}">
+                    <input class="form-check-input" type="checkbox" th:value="${image.isVisible}" th:id="|v_${image.id}|" th:field="*{isVisible}">
+                    <label class="form-check-label" th:for="|v_${image.id}|" >
+                        Visibility
                     </label>
                 </div>
 
-            </div>-->
+            </div>
 
 
             <div class="col-12">

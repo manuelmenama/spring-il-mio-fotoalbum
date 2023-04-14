@@ -38,6 +38,7 @@ public class ImageService {
         imageToStorage.setPathImage(formImage.getPathImage());
         imageToStorage.setDescription(formImage.getDescription());
         imageToStorage.setCategorySet(formImage.getCategorySet());
+        imageToStorage.setIsVisible(formImage.getIsVisible());
         imageToStorage.setCreatedAt(LocalDateTime.now());
         imageToStorage.setUpdatedAt(LocalDateTime.now());
         return imageRepository.save(imageToStorage);
@@ -48,6 +49,7 @@ public class ImageService {
         imageToUpdate.setPathImage(formImage.getPathImage());
         imageToUpdate.setDescription(formImage.getDescription());
         imageToUpdate.setCategorySet(formImage.getCategorySet());
+        imageToUpdate.setIsVisible(formImage.getIsVisible());
         imageToUpdate.setUpdatedAt(LocalDateTime.now());
         return imageRepository.save(imageToUpdate);
     }

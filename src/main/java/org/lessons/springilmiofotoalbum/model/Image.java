@@ -93,11 +93,11 @@ public class Image {
         this.pathImage = pathImage;
     }
 
-    public boolean isVisible() {
+    public boolean getIsVisible() {
         return isVisible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setIsVisible(boolean visible) {
         isVisible = visible;
     }
 

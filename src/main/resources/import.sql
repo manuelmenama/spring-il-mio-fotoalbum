@@ -1,6 +1,24 @@
 INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Una foto di tanti anni fà...', 'https://picsum.photos/seed/collo/1000/800', 1, 'Un viaggio', '2023-04-13 16:00');
-INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Tu che ne sai di un campo di grano?', 'https://picsum.photos/seed/mente/1000/800', 1, 'La mente', '2023-04-13 16:00');
+INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Tu che ne sai di un campo di grano?', 'https://picsum.photos/seed/mente/1000/800', 0, 'La mente', '2023-04-13 16:00');
 INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Eravamo quattro amici al bar.', 'https://picsum.photos/seed/solo/1000/800', 1, 'Solitario', '2023-04-13 16:00');
 INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Sogno di una notte di mezza estate.', 'https://picsum.photos/seed/abaco/1000/800', 1, 'Abcazia', '2023-04-13 16:00');
 INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'La bella e la bestia', 'https://picsum.photos/seed/due/1000/800', 1, 'Ballo', '2023-04-13 16:00');
 INSERT INTO db_photo.images (created_at, description, path_image, is_visible, title, updated_at) VALUES('2023-04-13 16:00', 'Degrado urbano.', 'https://picsum.photos/seed/strada/1000/800', 1, 'Vicolo', '2023-04-13 16:00');
+-- insert category
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Natura Morta', '2023-04-14 12:00');
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Panorama', '2023-04-14 12:00');
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Matrimonio', '2023-04-14 12:00');
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Set Fotografico', '2023-04-14 12:00');
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Urbano', '2023-04-14 12:00');
+INSERT INTO db_photo.categories (created_at, name, updated_at) VALUES('2023-04-14 12:00', 'Ritratto', '2023-04-14 12:00');
+--insert category-image
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(1, 1);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(1, 2);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(2, 6);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(2, 5);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(3, 3);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(4, 4);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(4, 2);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(5, 4);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(5, 1);
+INSERT INTO db_photo.category_image (image_id, category_id) VALUES(6, 6);

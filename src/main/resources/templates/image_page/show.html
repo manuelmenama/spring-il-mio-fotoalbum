@@ -18,8 +18,22 @@
                 <div class="card">
                     <img th:src="${imageToShow.pathImage}" class="card-img-top" th:alt="${imageToShow.title}">
                     <div class="card-body">
+                        <p class="card-text">
+                            <span class="badge text-bg-info me-1" th:each="category : ${imageToShow.categorySet}" th:object="${category}" th:text="${category.name}">
+                            </span>
+                        </p>
                         <h5 class="card-title" th:text="${imageToShow.title}"></h5>
                         <p class="card-text" th:text="${imageToShow.description}"></p>
+                        <p class="card-text">
+                            <span class="badge text-bg-danger" th:if="${!imageToShow.isVisible}">
+                                Visibility:
+                                <i class="fa-solid fa-xmark"></i>
+                            </span>
+                            <span class="badge text-bg-success" th:if="${imageToShow.isVisible}">
+                                Visibility:
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+                        </p>
                         <a th:href="@{/images}" class="btn btn-primary">
                             <i class="fa-solid fa-arrow-left"></i>
                         </a>

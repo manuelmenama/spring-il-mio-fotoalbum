@@ -2,7 +2,9 @@ package org.lessons.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
 import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
+import org.lessons.springilmiofotoalbum.model.Category;
 import org.lessons.springilmiofotoalbum.model.Image;
+import org.lessons.springilmiofotoalbum.service.CategoryService;
 import org.lessons.springilmiofotoalbum.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class ImageController {
 
     @Autowired
     ImageService imageService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @GetMapping
     public String index(Model model, @RequestParam Optional<String> q) {
@@ -49,6 +54,7 @@ public class ImageController {
     public String create(Model model) {
 
         model.addAttribute("image", new Image());
+        model.addAttribute("allCategories", categoryService.categories());
 
         return "image_page/edit";
     }
@@ -72,6 +78,7 @@ public class ImageController {
         if (id.isPresent()) {
             try {
                 Image image = imageService.getImageById(id.get());
+                model.addAttribute("allCategories", categoryService.categories());
                 model.addAttribute("image", image);
             } catch (ImageNotFoundException e) {
                 throw new RuntimeException(e);
@@ -99,7 +106,7 @@ public class ImageController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         try {
-            boolean succes = imageService.delete(id);
+            boolean success = imageService.delete(id);
 
         } catch (ImageNotFoundException e) {
             throw new RuntimeException(e);
