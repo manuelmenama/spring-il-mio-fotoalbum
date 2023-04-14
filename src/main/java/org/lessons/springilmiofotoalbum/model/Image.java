@@ -18,8 +18,8 @@ public class Image {
     @Column(nullable = false)
     private String title;
     private String description;
-
-    private String image;
+    @Column(name = "path_image")
+    private String pathImage;
     @Column(name = "is_visible", columnDefinition = "boolean default true")
     private boolean isVisible;
 
@@ -41,11 +41,11 @@ public class Image {
     public Image() {
     }
 
-    public Image(Integer id, String title, String description, String image, boolean isVisible, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Category> categorySet) {
+    public Image(Integer id, String title, String description, String pathImage, boolean isVisible, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Category> categorySet) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.pathImage = pathImage;
         this.isVisible = isVisible;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -77,12 +77,12 @@ public class Image {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getPathImage() {
+        return pathImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 
     public boolean isVisible() {

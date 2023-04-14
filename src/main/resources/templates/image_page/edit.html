@@ -12,9 +12,10 @@
     <div class="container">
         <form
                 method="post"
-                th:action="@{/images/edit/image}"
-                class="row gy-3">
-            <input type="hidden" th:field="${image.id}">
+                th:action="@{/images/edit}"
+                class="row gy-3"
+                th:object="${image}">
+            <!--<input type="hidden" th:field="${image.id}">-->
 
 <!--            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-warning">-->
 <!--                <ul>-->
@@ -27,7 +28,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="title">Image title</label>
-                            <input type="text" name="name" id="title" class="form-control"  th:field="${image.title}" th:errorClass="is-invalid">
+                            <input type="text" name="name" id="title" class="form-control"  th:field="*{title}" th:errorClass="is-invalid">
 <!--                            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">-->
 <!--                                <ul>-->
 <!--                                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>-->
@@ -37,7 +38,7 @@
 
                         <div class="col-6">
                             <label for="image">Image link</label>
-                            <input type="url" id="image" class="form-control" th:field="${image.image}" th:errorClass="is-invalid">
+                            <input type="url" id="image" class="form-control" th:field="*{pathImage}" th:errorClass="is-invalid">
 <!--                            <div th:if="${#fields.hasErrors('image')}" class="invalid-feedback">-->
 <!--                                <ul>-->
 <!--                                    <li th:each="error : ${#fields.errors('image')}" th:text="${error}"></li>-->
@@ -47,7 +48,7 @@
 
                         <div class="col-12">
                             <label for="description">Description</label>
-                            <textarea id="description" rows="3" class="form-control"  th:field="${image.description}"></textarea>
+                            <textarea id="description" rows="3" class="form-control"  th:field="*{description}"></textarea>
                         </div>
                     </div>
                 </div>

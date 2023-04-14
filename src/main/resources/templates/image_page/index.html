@@ -23,7 +23,7 @@
         <div class="row gy-4">
             <div class="col-4" th:each="image : ${selectedImages}" th:object="${image}">
                 <div class="card">
-                    <img th:src="${image.image}" class="card-img-top" th:alt="${image.title}">
+                    <img th:src="${image.pathImage}" class="card-img-top" th:alt="${image.title}">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${image.title}"></h5>
                         <p class="card-text" th:text="${image.description}"></p>

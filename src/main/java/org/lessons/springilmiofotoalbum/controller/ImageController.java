@@ -54,10 +54,9 @@ public class ImageController {
     }
 
     @PostMapping("/edit")
-    public String store(@Valid @ModelAttribute("image") Image formImage,
-                        BindingResult bindingResult,
+    public String store(@ModelAttribute(name = "image") Image formImage,
                         Model model) {
-        boolean hasErrors = bindingResult.hasErrors();
+        boolean hasErrors = false;
 
         if (hasErrors) {
             return "/image_page/edit";

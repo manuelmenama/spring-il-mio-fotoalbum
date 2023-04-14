@@ -35,7 +35,7 @@ public class ImageService {
     public Image create(Image formImage) {
         Image imageToStorage = new Image();
         imageToStorage.setTitle(formImage.getTitle());
-        imageToStorage.setImage(formImage.getImage());
+        imageToStorage.setPathImage(formImage.getPathImage());
         imageToStorage.setDescription(formImage.getDescription());
         imageToStorage.setCategorySet(formImage.getCategorySet());
         imageToStorage.setCreatedAt(LocalDateTime.now());
