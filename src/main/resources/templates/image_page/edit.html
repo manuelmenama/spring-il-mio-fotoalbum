@@ -2,17 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="~{/fragments/fragment_head :: head_resources}"></th:block>
-    <title>Add new image</title>
+    <title th:with="edit = ${image.id != null}" th:text="${edit} ? 'Edit of image ' + ${image.title} : 'Add new image'"></title>
 </head>
-<body>
+<body  th:with="edit = ${image.id != null}">
     <header>
         <th:block th:replace="~{/fragments/fragment_header :: navbar(false)}">
         </th:block>
     </header>
     <div class="container">
+        <h4 th:text="${edit} ? 'Edit of image ' + ${image.title} : 'Add new image'"></h4>
         <form
                 method="post"
-                th:action="@{/images/edit}"
+                th:with="formAction=${edit ? '/images/edit/' + image.id : '/images/edit'}"
+                th:action="${formAction}"
                 class="row gy-3"
                 th:object="${image}">
 

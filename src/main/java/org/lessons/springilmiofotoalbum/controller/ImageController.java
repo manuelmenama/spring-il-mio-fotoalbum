@@ -66,4 +66,33 @@ public class ImageController {
             return "redirect:/images";
         }
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Optional<Integer> id, Model model) {
+        if (id.isPresent()) {
+            try {
+                Image image = imageService.getImageById(id.get());
+                model.addAttribute("image", image);
+            } catch (ImageNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return "image_page/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id,
+                         @Valid @ModelAttribute Image imageForm,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()){
+            return "image_page/edit";
+        }
+        try {
+            Image imageToUpdate = imageService.update(imageForm, id);
+            return "redirect:/images/" + id;
+        } catch (ImageNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

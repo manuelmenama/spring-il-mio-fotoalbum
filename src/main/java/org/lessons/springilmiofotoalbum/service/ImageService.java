@@ -42,4 +42,13 @@ public class ImageService {
         imageToStorage.setUpdatedAt(LocalDateTime.now());
         return imageRepository.save(imageToStorage);
     }
+    public Image update(Image formImage, Integer id) throws ImageNotFoundException{
+        Image imageToUpdate = imageRepository.findById(id).orElseThrow(() -> new ImageNotFoundException("Image with id " + id + " not found!"));
+        imageToUpdate.setTitle(formImage.getTitle());
+        imageToUpdate.setPathImage(formImage.getPathImage());
+        imageToUpdate.setDescription(formImage.getDescription());
+        imageToUpdate.setCategorySet(formImage.getCategorySet());
+        imageToUpdate.setUpdatedAt(LocalDateTime.now());
+        return imageRepository.save(imageToUpdate);
+    }
 }
