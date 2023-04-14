@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{/fragments/fragment_head :: head_resources}"></th:block>
+    <title>Add new image</title>
+</head>
+<body>
+    <header>
+        <th:block th:replace="~{/fragments/fragment_header :: navbar(false)}">
+        </th:block>
+    </header>
+    <div class="container">
+        <form
+                method="post"
+                th:action="@{/images/edit/image}"
+                class="row gy-3">
+            <input type="hidden" th:field="${image.id}">
+
+<!--            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-warning">-->
+<!--                <ul>-->
+<!--                    <li th:each="error : ${#fields.errors()}" th:text="${error}"></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+            <!--colonna campi-->
+            <div class="col-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="title">Image title</label>
+                            <input type="text" name="name" id="title" class="form-control"  th:field="${image.title}" th:errorClass="is-invalid">
+<!--                            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">-->
+<!--                                <ul>-->
+<!--                                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                        </div>
+
+                        <div class="col-6">
+                            <label for="image">Image link</label>
+                            <input type="url" id="image" class="form-control" th:field="${image.image}" th:errorClass="is-invalid">
+<!--                            <div th:if="${#fields.hasErrors('image')}" class="invalid-feedback">-->
+<!--                                <ul>-->
+<!--                                    <li th:each="error : ${#fields.errors('image')}" th:text="${error}"></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                        </div>
+
+                        <div class="col-12">
+                            <label for="description">Description</label>
+                            <textarea id="description" rows="3" class="form-control"  th:field="${image.description}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--colonna ingredienti -->
+            <!--<div class="col-4">
+                <h6>Ingredienti:</h6>
+                <div
+                        th:each="ingredient : ${allIngredients}"
+                        class="form-check">
+                    <input class="form-check-input" type="checkbox" th:value="${ingredient.id}" th:id="|ingr_${ingredient.id}|" th:field="*{ingredients}">
+                    <label class="form-check-label" th:for="|ingr_${ingredient.id}|" th:text="${ingredient.name}">
+                    </label>
+                </div>
+
+            </div>-->
+
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a th:href="@{/images}" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

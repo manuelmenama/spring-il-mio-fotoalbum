@@ -18,8 +18,7 @@ public class Image {
     @Column(nullable = false)
     private String title;
     private String description;
-    @NotNull
-    @Column(nullable = false)
+
     private String image;
     @Column(name = "is_visible", columnDefinition = "boolean default true")
     private boolean isVisible;

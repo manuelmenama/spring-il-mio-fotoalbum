@@ -8,6 +8,7 @@ import org.lessons.springilmiofotoalbum.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,5 +30,16 @@ public class ImageService {
 
     public List<Image> getImageByTitle(String title) {
         return imageRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public Image create(Image formImage) {
+        Image imageToStorage = new Image();
+        imageToStorage.setTitle(formImage.getTitle());
+        imageToStorage.setImage(formImage.getImage());
+        imageToStorage.setDescription(formImage.getDescription());
+        imageToStorage.setCategorySet(formImage.getCategorySet());
+        imageToStorage.setCreatedAt(LocalDateTime.now());
+        imageToStorage.setUpdatedAt(LocalDateTime.now());
+        return imageRepository.save(imageToStorage);
     }
 }

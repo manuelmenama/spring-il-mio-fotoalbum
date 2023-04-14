@@ -14,6 +14,12 @@
     </header>
 
     <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Photos</h3>
+            <a th:href="@{/images/edit}" class="btn btn-outline-primary">
+                <i class="fa-solid fa-file-circle-plus"></i>
+            </a>
+        </div>
         <div class="row gy-4">
             <div class="col-4" th:each="image : ${selectedImages}" th:object="${image}">
                 <div class="card">
@@ -24,6 +30,7 @@
                         <a th:href="|/images/${image.id}|" class="btn btn-outline-primary">
                             <i class="fa-regular fa-image"></i>
                         </a>
+
                     </div>
                 </div>
             </div>

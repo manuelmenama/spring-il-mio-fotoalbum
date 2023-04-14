@@ -1,15 +1,14 @@
 package org.lessons.springilmiofotoalbum.controller;
 
+import jakarta.validation.Valid;
 import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Image;
 import org.lessons.springilmiofotoalbum.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,5 +43,27 @@ public class ImageController {
             throw new RuntimeException(e);
         }
         return "image_page/show";
+    }
+
+    @GetMapping("/edit")
+    public String create(Model model) {
+
+        model.addAttribute("image", new Image());
+
+        return "image_page/edit";
+    }
+
+    @PostMapping("/edit")
+    public String store(@Valid @ModelAttribute("image") Image formImage,
+                        BindingResult bindingResult,
+                        Model model) {
+        boolean hasErrors = bindingResult.hasErrors();
+
+        if (hasErrors) {
+            return "/image_page/edit";
+        } else {
+            imageService.create(formImage);
+            return "redirect:/images";
+        }
     }
 }
