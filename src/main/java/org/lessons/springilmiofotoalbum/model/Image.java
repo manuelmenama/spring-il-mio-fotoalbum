@@ -2,6 +2,8 @@ package org.lessons.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -15,10 +17,16 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
+    @Size(min = 3, max = 100, message
+            = "About Me must be between 3 and 100 characters")
     @Column(nullable = false)
     private String title;
     private String description;
-    @Column(name = "path_image")
+    @NotNull
+    @Size(min = 4, message
+            = "Image path must be almost 4 charaters")
+    @URL
+    @Column(name = "path_image", nullable = false)
     private String pathImage;
     @Column(name = "is_visible", columnDefinition = "boolean default true")
     private boolean isVisible;

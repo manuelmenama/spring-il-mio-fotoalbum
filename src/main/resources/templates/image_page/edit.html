@@ -15,13 +15,14 @@
                 th:action="@{/images/edit}"
                 class="row gy-3"
                 th:object="${image}">
-            <!--<input type="hidden" th:field="${image.id}">-->
 
-<!--            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-warning">-->
-<!--                <ul>-->
-<!--                    <li th:each="error : ${#fields.errors()}" th:text="${error}"></li>-->
-<!--                </ul>-->
-<!--            </div>-->
+            <input type="hidden" th:field="${image.id}">
+
+            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-warning">
+                <ul>
+                    <li th:each="error : ${#fields.errors()}" th:text="${error}"></li>
+                </ul>
+            </div>
             <!--colonna campi-->
             <div class="col-8">
                 <div class="container">
@@ -29,21 +30,21 @@
                         <div class="col-6">
                             <label for="title">Image title</label>
                             <input type="text" name="name" id="title" class="form-control"  th:field="*{title}" th:errorClass="is-invalid">
-<!--                            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">-->
-<!--                                <ul>-->
-<!--                                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
+                            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="col-6">
                             <label for="image">Image link</label>
-                            <input type="url" id="image" class="form-control" th:field="*{pathImage}" th:errorClass="is-invalid">
-<!--                            <div th:if="${#fields.hasErrors('image')}" class="invalid-feedback">-->
-<!--                                <ul>-->
-<!--                                    <li th:each="error : ${#fields.errors('image')}" th:text="${error}"></li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
+                            <input type="text" id="image" class="form-control" th:field="*{pathImage}" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('pathImage')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('pathImage')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="col-12">
