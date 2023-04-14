@@ -95,4 +95,15 @@ public class ImageController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        try {
+            boolean succes = imageService.delete(id);
+
+        } catch (ImageNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/images";
+    }
 }

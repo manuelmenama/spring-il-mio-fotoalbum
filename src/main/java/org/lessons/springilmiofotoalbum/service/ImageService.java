@@ -51,4 +51,15 @@ public class ImageService {
         imageToUpdate.setUpdatedAt(LocalDateTime.now());
         return imageRepository.save(imageToUpdate);
     }
+
+    public boolean delete(Integer id) throws ImageNotFoundException {
+        imageRepository.findById(id).orElseThrow(() -> new ImageNotFoundException("Image with id " + id + " not found!"));
+
+        try {
+            imageRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
