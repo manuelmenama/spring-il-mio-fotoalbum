@@ -31,4 +31,10 @@ INSERT INTO db_photo.roles (title) VALUES('USER');
 --insert user-role
 INSERT INTO db_photo.role_user (user_id, role_id) VALUES(1, 1);
 INSERT INTO db_photo.role_user (user_id, role_id) VALUES(2, 2);
+--insert contact
+--INSERT INTO db_photo.contact (email, `text`, title) VALUES('billiballo@email.com', 'Come ti avevo promesso ho visto tutte le tue foto e sono assolutamente stupefacenti.', 'Foto straordinarie');
+--INSERT INTO db_photo.contact (email, `text`, title) VALUES('billiballo@email.com', 'Come ti avevo promesso ho visto tutte le tue foto e sono assolutamente stupefacenti.', 'Foto straordinarie');
+INSERT INTO db_photo.contact (created_at, email, `text`, title, updated_at) VALUES('2023-04-15 17:00', 'billiballo@email.com', 'Come ti avevo promesso ho visto tutte le tue foto e sono assolutamente stupefacenti.', 'Foto straordinarie', '2023-04-15 17:00');
+INSERT INTO db_photo.contact (created_at, email, `text`, title, updated_at) VALUES('2023-04-15 17:00', 'miaemail@email.com', 'Volevo proporle un ottimo aspirapolvere.', 'Promo straordinaria!', '2023-04-15 17:00');
+
 

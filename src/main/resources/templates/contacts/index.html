@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{/fragments/fragment_head :: head_resources}"></th:block>
+    <title>All your message</title>
+</head>
+<body>
+    <header>
+        <th:block th:replace="~{/fragments/fragment_header :: navbar(true)}">
+        </th:block>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Object</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="contact : ${contacts}">
+                        <th scope="row" th:text="${contact.id}"></th>
+                        <td th:text="${contact.email}"></td>
+                        <td th:text="${contact.title}"></td>
+                        <td>
+                            <a th:href="@{/contacts(idParam=${contact.id})}" class="btn btn-outline-primary btn-sm">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6" th:if="${selectedContact!=null}">
+                <div class="card">
+                    <div class="card-header" th:text="${selectedContact.email}">
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"  th:text="${selectedContact.title}"></li>
+                        <li class="list-group-item"  th:text="${selectedContact.text}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
