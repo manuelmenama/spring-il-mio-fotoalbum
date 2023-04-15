@@ -22,3 +22,13 @@ INSERT INTO db_photo.category_image (image_id, category_id) VALUES(4, 2);
 INSERT INTO db_photo.category_image (image_id, category_id) VALUES(5, 4);
 INSERT INTO db_photo.category_image (image_id, category_id) VALUES(5, 1);
 INSERT INTO db_photo.category_image (image_id, category_id) VALUES(6, 6);
+--insert users
+INSERT INTO db_photo.users (created_at, email, first_name, password, second_name, updated_at) VALUES('2023-04-15 11:00', 'boss@email.com', 'Boss', '{noop}boss', 'Delle Torte', '2023-04-15 11:00');
+INSERT INTO db_photo.users (created_at, email, first_name, password, second_name, updated_at) VALUES('2023-04-15 11:00', 'steve@email.com', 'Steve', '{noop}steve', 'Stivali', '2023-04-15 11:00');
+--insert roles
+INSERT INTO db_photo.roles (title) VALUES('ADMIN');
+INSERT INTO db_photo.roles (title) VALUES('USER');
+--insert user-role
+INSERT INTO db_photo.role_user (user_id, role_id) VALUES(1, 1);
+INSERT INTO db_photo.role_user (user_id, role_id) VALUES(2, 2);
+
