@@ -1,10 +1,11 @@
 package org.lessons.springilmiofotoalbum.api;
 
+import jakarta.validation.Valid;
+import org.lessons.springilmiofotoalbum.model.Contact;
 import org.lessons.springilmiofotoalbum.repository.ContactRepository;
+import org.lessons.springilmiofotoalbum.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -12,5 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactRestController {
 
     @Autowired
-    ContactRepository contactRepository;
+    ContactService contactService;
+
+    @PostMapping
+    public Contact contactCreated(@Valid @RequestBody Contact contact){
+        return contactService.createNewContact(contact);
+    }
 }
