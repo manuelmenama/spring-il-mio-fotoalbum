@@ -4,14 +4,18 @@ import jakarta.validation.Valid;
 import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Category;
 import org.lessons.springilmiofotoalbum.model.Image;
+import org.lessons.springilmiofotoalbum.model.ImageFileForm;
 import org.lessons.springilmiofotoalbum.service.CategoryService;
 import org.lessons.springilmiofotoalbum.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,5 +116,32 @@ public class ImageController {
             throw new RuntimeException(e);
         }
         return "redirect:/images";
+    }
+
+    @GetMapping("/{id}/image_file")
+    public String editImageFile(@PathVariable Integer id, Model model) {
+        try {
+            Image image = imageService.getImageById(id);
+            //creo un oggetto imageFileForm e lo setto come attributo del model
+            ImageFileForm imageFileForm = new ImageFileForm();
+            imageFileForm.setImage(image);
+            model.addAttribute("imageFileForm", imageFileForm);
+            return "/image_page/cover_edit";
+        } catch (ImageNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{id}/image_file/save")
+    public String storeImageFile(@PathVariable Integer id, @ModelAttribute ImageFileForm imageFileForm) {
+        //salvo l'immagine nel db
+        try {
+            imageService.updateBookImageFile(id, imageFileForm);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ImageNotFoundException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return "redirect:/images/" + Integer.toString(id);
     }
 }

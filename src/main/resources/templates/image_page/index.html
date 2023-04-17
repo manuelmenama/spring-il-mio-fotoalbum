@@ -23,7 +23,11 @@
         <div class="row gy-4">
             <div class="col-4" th:each="image : ${selectedImages}" th:object="${image}">
                 <div class="card">
-                    <img th:src="${image.pathImage}" class="card-img-top" th:alt="${image.title}">
+                    <img th:unless="${image.imageFile == null || image.imageFile.content == null}" th:src="@{|/files/${image.imageFile.id}|}" class="card-img-top" th:alt="${image.title}">
+                    <div class="card-header h-100"  th:if="${image.imageFile == null || image.imageFile.content == null}">
+                        <i class="fa-regular fa-eye-slash"></i>
+                        No image
+                    </div>
                     <div class="card-body">
                         <p class="card-text">
                             <span class="badge text-bg-info me-1" th:each="category : ${image.categorySet}" th:object="${category}" th:text="${category.name}">

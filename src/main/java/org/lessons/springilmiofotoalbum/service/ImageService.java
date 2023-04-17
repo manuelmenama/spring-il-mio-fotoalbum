@@ -3,11 +3,15 @@ package org.lessons.springilmiofotoalbum.service;
 
 import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Image;
+import org.lessons.springilmiofotoalbum.model.ImageFile;
+import org.lessons.springilmiofotoalbum.model.ImageFileForm;
 import org.lessons.springilmiofotoalbum.repository.CategoryRepository;
+import org.lessons.springilmiofotoalbum.repository.ImageFileRepository;
 import org.lessons.springilmiofotoalbum.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +22,9 @@ public class ImageService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    ImageFileRepository imageFileRepository;
 
     public List<Image> getAllImage() {
         return imageRepository.findAll();
@@ -63,5 +70,13 @@ public class ImageService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public ImageFile updateBookImageFile(Integer id, ImageFileForm imageFileForm) throws ImageNotFoundException, IOException {
+        Image imageToUpdateCover = imageRepository.findById(id).orElseThrow(() -> new ImageNotFoundException("Image with id " + id + " not found!"));
+        ImageFile newImageFile = new ImageFile();
+        newImageFile.setImage(imageToUpdateCover);
+        newImageFile.setContent(imageFileForm.getMultipartFile().getBytes());
+        return imageFileRepository.save(newImageFile);
     }
 }

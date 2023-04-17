@@ -45,6 +45,9 @@ public class Image {
     )
     private Set<Category> categorySet;
 
+    @OneToOne(mappedBy = "image")
+    private ImageFile imageFile;
+
     //costruttore
     public Image() {
     }
@@ -125,6 +128,13 @@ public class Image {
         this.categorySet = categorySet;
     }
 
+    public ImageFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(ImageFile imageFile) {
+        this.imageFile = imageFile;
+    }
 
     //metodi
 

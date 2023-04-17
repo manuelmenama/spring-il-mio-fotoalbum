@@ -15,8 +15,22 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <img th:src="${imageToShow.pathImage}" class="card-img-top" th:alt="${imageToShow.title}">
+                <div class="card position-relative">
+                    <img th:unless="${imageToShow.imageFile == null || imageToShow.imageFile.content == null}" th:src="@{|/files/${imageToShow.imageFile.id}|}" class="card-img-top" th:alt="${imageToShow.title}">
+                    <div class="card-header" th:if="${imageToShow.imageFile == null || imageToShow.imageFile.content == null}">
+                        <span>
+                            <i class="fa-regular fa-eye-slash"></i>
+                            No image
+                        </span>
+
+
+                    </div>
+                    <span class="position-absolute top-0 end-0 m-1">
+                        <a th:href="@{|/images/${imageToShow.id}/image_file|}" class="btn btn-outline-primary rounded-circle btn-sm">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                        </a>
+                    </span>
+
                     <div class="card-body">
                         <p class="card-text">
                             <span class="badge text-bg-info me-1" th:each="category : ${imageToShow.categorySet}" th:object="${category}" th:text="${category.name}">
