@@ -1,5 +1,6 @@
 package org.lessons.springilmiofotoalbum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class ImageFile {
     private byte[] content;
 
     @OneToOne
+    @JsonIgnore
     private Image image;
 
     public Integer getId() {
