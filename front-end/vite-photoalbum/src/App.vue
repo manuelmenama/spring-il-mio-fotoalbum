@@ -10,7 +10,10 @@
     data(){
       return {
         BASE_URL,
-        store
+        store,
+        formEmail:'',
+        formTitle:'',
+        formText:''
       }
     },
     methods: {
@@ -21,10 +24,23 @@
 
             store.images = result.data;
           })
+      },
+      sendContactForm() {
+        const data = {
+          email: this.formEmail,
+          title: this.formTitle,
+          text: this.formTitle
+        }
+        console.log(data);
+        axios.post(`${BASE_URL}/contact`, data)
+          .then(result => {
+            console.log(result.data);
+          })
       }
     },
     mounted() {
       this.getAllImages();
+      
     }
 
   }
@@ -32,13 +48,15 @@
 
 <template>
   <div class="container">
+    <h1 class="my-3">Images</h1>
+
     <div class="row">
 
       <div
         class="col-4"
         v-for="image in store.images"
         :key="image.id"
-
+        v-show="image.isVisible"
       >
         <div class="card">
           <img :src="image.pathImage" class="card-img-top" :alt="image.title">
@@ -51,19 +69,25 @@
 
     </div>
     <h1 class="mt-5">Contacts</h1>
-    <form action="" class="row">
-      <div class="mb-3">
+    <form @submit.prevent="sendContactForm()" class="row">
+      <div class="col-6 mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        <input v-model.trim="formEmail" type="email" class="form-control" id="email" placeholder="name@example.com">
       </div>
-      <div class="mb-3">
+      <div class="col-6 mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="email" class="form-control" id="title" placeholder="Title...">
+        <input v-model.trim="formTitle" type="text" class="form-control" id="title" placeholder="Title...">
       </div>
-      <div class="mb-3">
+      <div class="col-12 mb-3">
         <label for="text" class="form-label">Message</label>
-        <textarea class="form-control" id="text" rows="3"></textarea>
+        <textarea v-model.trim="formText" class="form-control" id="text" rows="3"></textarea>
       </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">
+          Send
+        </button>
+      </div>
+      
     </form>
   </div>
 </template>

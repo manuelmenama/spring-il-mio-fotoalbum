@@ -26,11 +26,9 @@ public class Contact {
     @Lob
     private String text;
 
-    @NotNull
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @NotNull
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
