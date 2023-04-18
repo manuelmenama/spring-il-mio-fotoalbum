@@ -36,6 +36,9 @@
           .then(result => {
             console.log(result.data);
           })
+      },
+      generateImageLink(imageFileId) {
+        return `http://localhost:8080/files/` + imageFileId;
       }
     },
     mounted() {
@@ -59,7 +62,7 @@
         v-show="image.isVisible"
       >
         <div class="card">
-          <img :src="" class="card-img-top" :alt="image.title">
+          <img v-if="image.imageFile != null" :src="generateImageLink(image.imageFile.id)" class="card-img-top" :alt="image.title">
           <div class="card-body">
             <h5 class="card-title">{{image.title}}</h5>
             <p class="card-text">{{ image.description }}</p>
