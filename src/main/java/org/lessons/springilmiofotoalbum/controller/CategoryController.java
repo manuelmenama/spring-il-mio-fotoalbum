@@ -2,6 +2,7 @@ package org.lessons.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
 import org.lessons.springilmiofotoalbum.exception.CategoryNotFoundException;
+import org.lessons.springilmiofotoalbum.model.AlertMessage;
 import org.lessons.springilmiofotoalbum.model.Category;
 import org.lessons.springilmiofotoalbum.repository.CategoryRepository;
 import org.lessons.springilmiofotoalbum.service.CategoryService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +55,20 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    private String delete(@PathVariable Integer id) {
-        boolean success = categoryService.delete(id);
+    private String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            boolean success = categoryService.delete(id);
+            if (success) {
+                redirectAttributes.addFlashAttribute("message",
+                        new AlertMessage(AlertMessage.AlertMessageType.SUCCESS, "Element with id " + id + " deleted with success."));
+            } else {
+                redirectAttributes.addFlashAttribute("message",
+                        new AlertMessage(AlertMessage.AlertMessageType.ERROR, "Unable to delete element with id " + id));
+            }
+        } catch (CategoryNotFoundException e) {
+            redirectAttributes.addFlashAttribute("message",
+                    new AlertMessage(AlertMessage.AlertMessageType.ERROR, "Element with id " + id + " not found."));
+        }
         return "redirect:/categories";
     }
 }

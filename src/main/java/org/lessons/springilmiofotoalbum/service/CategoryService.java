@@ -1,6 +1,7 @@
 package org.lessons.springilmiofotoalbum.service;
 
 import org.lessons.springilmiofotoalbum.exception.CategoryNotFoundException;
+import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
 import org.lessons.springilmiofotoalbum.model.Category;
 import org.lessons.springilmiofotoalbum.model.Image;
 import org.lessons.springilmiofotoalbum.repository.CategoryRepository;
@@ -43,18 +44,18 @@ public class CategoryService {
         return categoryRepository.save(categoryToUpdate);
     }
 
-    public boolean delete(Integer id) {
+    public boolean delete(Integer id) throws CategoryNotFoundException {
+
+        categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category with id " + id + " not found!"));
+
         try {
-            categoryById(id);
-            try {
-                categoryRepository.deleteById(id);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        } catch (CategoryNotFoundException e) {
+            categoryRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
             return false;
         }
+
+
 
 
     }
