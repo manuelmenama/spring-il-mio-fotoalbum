@@ -2,6 +2,7 @@ package org.lessons.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
 import org.lessons.springilmiofotoalbum.exception.ImageNotFoundException;
+import org.lessons.springilmiofotoalbum.model.AlertMessage;
 import org.lessons.springilmiofotoalbum.model.Category;
 import org.lessons.springilmiofotoalbum.model.Image;
 import org.lessons.springilmiofotoalbum.model.ImageFileForm;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -108,12 +110,20 @@ public class ImageController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             boolean success = imageService.delete(id);
+            if (success) {
+                redirectAttributes.addFlashAttribute("message",
+                        new AlertMessage(AlertMessage.AlertMessageType.SUCCESS, "Element with id " + id + " deleted with success."));
+            } else {
+                redirectAttributes.addFlashAttribute("message",
+                        new AlertMessage(AlertMessage.AlertMessageType.ERROR, "Unable to delete element with id " + id));
+            }
 
         } catch (ImageNotFoundException e) {
-            throw new RuntimeException(e);
+            redirectAttributes.addFlashAttribute("message",
+                    new AlertMessage(AlertMessage.AlertMessageType.ERROR, "Element with id " + id + " not found."));
         }
         return "redirect:/images";
     }
