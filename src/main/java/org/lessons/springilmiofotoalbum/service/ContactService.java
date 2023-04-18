@@ -22,7 +22,7 @@ public class ContactService {
     }
 
     public Contact getContactById(Integer idParam) throws ContactNotFoundException {
-        return contactRepository.findById(idParam).orElseThrow(() -> new ImageNotFoundException("Contact with id " + idParam + " not found!"));
+        return contactRepository.findById(idParam).orElseThrow(() -> new ContactNotFoundException("Contact with id " + idParam + " not found!"));
     }
 
     public Contact createNewContact(Contact formContact) {
@@ -33,5 +33,16 @@ public class ContactService {
         contactToCreate.setCreatedAt(LocalDateTime.now());
         contactToCreate.setUpdatedAt(LocalDateTime.now());
         return contactRepository.save(contactToCreate);
+    }
+
+    public boolean deleteContact(Integer id) {
+        contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + " not found!"));
+
+        try {
+            contactRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
